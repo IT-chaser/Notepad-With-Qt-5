@@ -16,6 +16,16 @@ ApplicationWindow {
         text: "open file"
         onTriggered: {
             //open file dialog
+            openFileDialog.selectExisting = true
+            openFileDialog.open()
+        }
+    }
+    Action {
+        id: saveFile
+        text: "save"
+        onTriggered: {
+            openFileDialog.selectExisting = false
+            openFileDialog.open()
         }
     }
 
@@ -33,10 +43,12 @@ ApplicationWindow {
             MenuItem {
                 text: qsTr("Open")
                 enabled: true
+                action: openFile
             }
             MenuItem {
                 text: qsTr("Save")
                 enabled: true
+                action: saveFile
             }
             MenuItem {
                 text: qsTr("Save as")
@@ -125,7 +137,15 @@ ApplicationWindow {
     }
 
     FileDialog {
-
+        id: openFileDialog
+        nameFilters: ["Text files (*.txt)", "HTML files (*.html, *.htm)"]
+        onAccepted: {
+            if (openFileDialog.selectExisting) {
+                //open file
+            } else {
+                // todo save / close
+            }
+        }
     }
 
     TextArea {
