@@ -10,6 +10,9 @@ int main(int argc, char *argv[])
     QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
 #endif
     QGuiApplication app(argc, argv);
+    QGuiApplication::setApplicationName("Notepad Example");
+    QGuiApplication::setOrganizationName("Tutorial");
+    QGuiApplication::setOrganizationDomain("tutorial");
 
     QTranslator translator;
     const QStringList uiLanguages = QLocale::system().uiLanguages();

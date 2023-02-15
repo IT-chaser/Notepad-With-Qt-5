@@ -3,6 +3,7 @@ import QtQuick.Window 2.15
 import QtQuick.Controls 2.15
 import QtQuick.Layouts 1.12
 import QtQuick.Dialogs 1.2
+import Qt.labs.platform 1.0
 
 ApplicationWindow {
     width: 640
@@ -10,26 +11,20 @@ ApplicationWindow {
     visible: true
     title: qsTr("Notepad")
 
-
-    Action {
-        id: openFile
-        text: "open file"
-        onTriggered: {
-            //open file dialog
-            openFileDialog.selectExisting = true
-            openFileDialog.open()
-        }
+    Shortcut {
+        sequence: StandarKey.Open
+        onActivated: openFileDialog.open()
     }
-    Action {
-        id: saveFile
-        text: "save"
-        onTriggered: {
-            openFileDialog.selectExisting = false
-            openFileDialog.open()
-        }
+    Shortcut {
+        sequence: StandardKey.SaveAs
+        onActivated: saveDialog.open()
+    }
+    Shortcut {
+        sequence: StandardKey.Quit
+        onActivated: close()
     }
 
-    menuBar: MenuBar {
+    MenuBar {
         id: notePadMenu
 
         Menu {
@@ -43,12 +38,13 @@ ApplicationWindow {
             MenuItem {
                 text: qsTr("Open")
                 enabled: true
-                action: openFile
+                onTriggered: openFileDialog.open()
             }
             MenuItem {
                 text: qsTr("Save")
                 enabled: true
-                action: saveFile
+                onTriggered: saveDialog.open()
+
             }
             MenuItem {
                 text: qsTr("Save as")
@@ -61,6 +57,7 @@ ApplicationWindow {
             MenuItem {
                 text: qsTr("Exit")
                 enabled: true
+                onTriggered: close()
             }
         }
         Menu {
@@ -139,12 +136,23 @@ ApplicationWindow {
     FileDialog {
         id: openFileDialog
         nameFilters: ["Text files (*.txt)", "HTML files (*.html, *.htm)"]
+        fileMode: FileDialog.OpenFile
         onAccepted: {
-            if (openFileDialog.selectExisting) {
-                //open file
-            } else {
-                // todo save / close
-            }
+            // load file
+        }
+        onRejected: {
+            // skip open
+        }
+    }
+    FileDialog {
+        id: saveDialog
+        nameFilters: ["Text files (*.txt)", "HTML files (*.html, *.htm)"]
+        fileMode: FileDialog.SaveFile
+        onAccepted: {
+            // save file
+        }
+        onRejected: {
+            // skip saving
         }
     }
 
