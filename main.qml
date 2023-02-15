@@ -71,18 +71,22 @@ ApplicationWindow {
             MenuItem {
                 text: qsTr("Cut")
                 enabled: true
+                onTriggered: textEditArea.cut()
             }
             MenuItem {
                 text: qsTr("Copy")
                 enabled: true
+                onTriggered: textEditArea.copy()
             }
             MenuItem {
                 text: qsTr("Paste")
                 enabled: true
+                onTriggered: textEditArea.paste()
             }
             MenuItem {
                 text: qsTr("Select All")
                 enabled: true
+                onTriggered: textEditArea.selectAll()
             }
         }
         Menu {
@@ -157,10 +161,12 @@ ApplicationWindow {
     }
 
     TextArea {
-        id: textEditArea
+        id: textEditArccea
         width: parent.width
         anchors.top: topToolbar.bottom
         anchors.bottom: parent.bottom
+        selectByMouse: true
+        persistentSelection: true
         //text:
         textFormat: Qt.RichText
         Component.onCompleted: forceActiveFocus()
