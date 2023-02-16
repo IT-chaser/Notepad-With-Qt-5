@@ -4,6 +4,7 @@ import QtQuick.Controls 2.15
 import QtQuick.Layouts 1.12
 import QtQuick.Dialogs 1.2
 import Qt.labs.platform 1.0
+import notepad.example.texteditor 1.0
 
 ApplicationWindow {
     width: 640
@@ -158,6 +159,11 @@ ApplicationWindow {
         onRejected: {
             // skip saving
         }
+    }
+
+    DocumentController {
+        id: docController
+        notepadDoc: textEditArea.textDocument
     }
 
     TextArea {
