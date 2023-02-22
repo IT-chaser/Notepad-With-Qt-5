@@ -15,9 +15,20 @@ public:
 
     QQuickTextDocument *notepadDoc() const;
     void setNotepadDoc(QQuickTextDocument *doc);
+
 signals:
     void notepadDocChanged();
+
+    void fileContentLoaded(const QString &content, int format);
+
+public slots:
+    void openFile(const QUrl &fileUrl);
+
 private:
+    QTextDocument *getQtextDocument();
+
+    QUrl m_currentFileUrl;
+    QTextDocument *m_qtextDocument;
     QQuickTextDocument *m_notepadDoc;
 };
 

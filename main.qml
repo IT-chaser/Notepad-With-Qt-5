@@ -144,6 +144,7 @@ ApplicationWindow {
         fileMode: FileDialog.OpenFile
         onAccepted: {
             // load file
+            docController.openFile(file);
         }
         onRejected: {
             // skip open
@@ -164,10 +165,15 @@ ApplicationWindow {
     DocumentController {
         id: docController
         notepadDoc: textEditArea.textDocument
+
+        onFileContentLoaded: {
+            textEditArea.textFormat = format
+            textEditArea.text = content
+        }
     }
 
     TextArea {
-        id: textEditArccea
+        id: textEditArea
         width: parent.width
         anchors.top: topToolbar.bottom
         anchors.bottom: parent.bottom
