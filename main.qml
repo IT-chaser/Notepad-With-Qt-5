@@ -137,6 +137,152 @@ ApplicationWindow {
 
     header: ToolBar {
         id: topToolbar
+        Row {
+            anchors.fill: parent
+
+            ToolButton {
+                id: openButton
+
+                contentItem: Rectangle {
+                    color: "black"
+                    Image {
+                        anchors.fill: parent
+                        source: "images/Newfile.svg"
+                    }
+                }
+                onClicked: openFileDialog.open()
+            }
+            ToolButton {
+                id: saveButton
+
+                contentItem: Rectangle {
+                    color: "black"
+                    Image {
+                        anchors.fill: parent
+                        source: "images/save.svg"
+                    }
+                }
+                onClicked: docController.saveContent()
+            }
+            ToolButton {
+                id: saveAsButton
+
+                contentItem: Rectangle {
+                    color: "black"
+                    Image {
+                        anchors.fill: parent
+                        source: "images/saveas.svg"
+                    }
+                }
+                onClicked: saveDialog.open()
+            }
+            ToolButton {
+                id: printButton
+
+                contentItem: Rectangle {
+                    color: "black"
+                    Image {
+                        anchors.fill: parent
+                        source: "images/print.svg"
+                    }
+                }
+                // onClicked:
+            }
+            ToolButton {
+                id: undoButton
+
+                contentItem: Rectangle {
+                    color: "black"
+                    Image {
+                        anchors.fill: parent
+                        source: "images/undo.svg"
+                    }
+                }
+                // onClicked:
+            }
+            ToolButton {
+                id: redoButton
+
+                contentItem: Rectangle {
+                    color: "black"
+                    Image {
+                        anchors.fill: parent
+                        source: "images/dustin-w-Redo-icon.svg"
+                    }
+                }
+                // onClicked:
+            }
+            ToolButton {
+                id: cutButton
+
+                contentItem: Rectangle {
+                    //color: "black"
+                    Image {
+                        anchors.fill: parent
+                        source: "images/cut.svg"
+                    }
+                }
+                onClicked: textEditArea.cut()
+            }
+            ToolButton {
+                id: copyButton
+
+                contentItem: Rectangle {
+                    //color: "black"
+                    Image {
+                        anchors.fill: parent
+                        source: "images/primary-copy.svg"
+                    }
+                }
+                onClicked: textEditArea.copy()
+            }
+            ToolButton {
+                id: pasteButton
+
+                contentItem: Rectangle {
+                    //color: "black"
+                    Image {
+                        anchors.fill: parent
+                        source: "images/Paste.svg"
+                    }
+                }
+                onClicked: textEditArea.paste()
+            }
+            ToolButton {
+                id: boldButton
+                contentItem: Rectangle {
+                    //color: "black"
+                    Image {
+                        anchors.fill: parent
+                        source: "images/fttext-bold.svg"
+                    }
+                }
+                // onClicked:
+            }
+            ToolButton {
+                id: italicButton
+                contentItem: Rectangle {
+                    //color: "black"
+                    Image {
+                        anchors.fill: parent
+                        source: "images/primary-text-italic.svg"
+                    }
+                }
+                // onClicked:
+            }
+            ToolButton {
+                id: underlineButton
+
+                contentItem: Rectangle {
+                    //color: "black"
+                    Image {
+                        anchors.fill: parent
+                        source: "images/mono-text-under.svg"
+                    }
+                }
+                // onClicked:
+            }
+        }
     }
 
     FileDialog {
