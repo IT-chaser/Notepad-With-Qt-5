@@ -44,12 +44,13 @@ ApplicationWindow {
             MenuItem {
                 text: qsTr("Save")
                 enabled: true
-                onTriggered: saveDialog.open()
+                onTriggered: docController.saveContent()
 
             }
             MenuItem {
                 text: qsTr("Save as")
                 enabled: true
+                onTriggered: saveDialog.open()
             }
             MenuItem {
                 text: qsTr("Print")

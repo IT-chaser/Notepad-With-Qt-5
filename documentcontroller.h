@@ -24,6 +24,8 @@ signals:
 public slots:
     void openFile(const QUrl &fileUrl);
 
+    void saveContent();
+
 private:
     QTextDocument *getQtextDocument();
 

@@ -48,3 +48,19 @@ void DocumentController::openFile(const QUrl &fileUrl) {
     }
     m_currentFileUrl = fileUrl;
 }
+
+void DocumentController::saveContent() {
+    if (m_currentFileUrl.isEmpty() || m_notepadDoc == nullptr) {
+        return;
+    }
+
+    m_qtextDocument = m_notepadDoc->textDocument();
+    const QString curfilePath = m_currentFileUrl.toLocalFile();
+
+    QFile fileObj(curfilePath);
+
+    if (fileObj.open(QFile::WriteOnly)) {
+        fileObj.write(m_qtextDocument->toPlainText().toUtf8());
+        fileObj.close();
+    }
+}
