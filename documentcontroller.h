@@ -26,6 +26,8 @@ public slots:
 
     void saveContent();
 
+    void createFile(const QUrl &fileUrl);
+
 private:
     QTextDocument *getQtextDocument();
 

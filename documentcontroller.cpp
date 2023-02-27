@@ -26,6 +26,28 @@ QTextDocument *DocumentController::getQtextDocument() {
     return m_qtextDocument;
 }
 
+void DocumentController::createFile(const QUrl &fileUrl) {
+    if (fileUrl.isEmpty())
+        return;
+    const QString filename = QQmlFile::urlToLocalFileOrQrc(QUrl(fileUrl));
+
+    QFile fileObj(filename);
+    fileObj.open(QFile::WriteOnly);
+    fileObj.write("");
+    fileObj.close();
+
+    if(fileObj.open(QFile::ReadOnly)) {
+        QByteArray content = fileObj.readAll();
+        m_qtextDocument = m_notepadDoc->textDocument();
+
+        if (m_qtextDocument) {
+            emit fileContentLoaded(QString::fromUtf8(content), Qt::MarkdownText);
+            m_qtextDocument->setModified(false);
+        }
+    }
+    m_currentFileUrl = fileUrl;
+}
+
 void DocumentController::openFile(const QUrl &fileUrl) {
     if (fileUrl.isEmpty())
         return;

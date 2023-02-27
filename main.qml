@@ -33,7 +33,7 @@ ApplicationWindow {
             title: qsTr("File")
             MenuItem {
                 text: qsTr("New")
-                //onTriggered: //call function open file
+                onTriggered: newFile.open()
                 enabled: true
             }
             MenuItem {
@@ -141,13 +141,26 @@ ApplicationWindow {
             anchors.fill: parent
 
             ToolButton {
-                id: openButton
+                id: newButton
 
                 contentItem: Rectangle {
                     color: "black"
                     Image {
                         anchors.fill: parent
                         source: "images/Newfile.svg"
+                    }
+                }
+                onClicked: newFile.open()
+            }
+
+            ToolButton {
+                id: openButton
+
+                contentItem: Rectangle {
+                    color: "black"
+                    Image {
+                        anchors.fill: parent
+                        source: "images/folder-open.svg"
                     }
                 }
                 onClicked: openFileDialog.open()
@@ -306,6 +319,15 @@ ApplicationWindow {
         }
         onRejected: {
             // skip saving
+        }
+    }
+    FileDialog {
+        id: newFile
+        fileMode: FileDialog.SaveFile
+        title: "Create new file"
+
+        onAccepted: {
+            docController.createFile(file)
         }
     }
 
